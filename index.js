@@ -1,3 +1,1 @@
-/**
- * Created by lumanskiy on 6/29/2017.
- */
+module.exports = require('./src/app');

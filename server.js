@@ -1,1 +1,2 @@
-module.exports = require('./src/app');
+const app = require('./src/app');
+app.run();
