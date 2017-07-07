@@ -17,10 +17,13 @@
   },
   "homepage": "https://github.com/rdata-systems/rdata-user-server#readme",
   "dependencies": {
+    "bcrypt": "^1.0.2",
     "body-parser": "^1.17.2",
+    "brcypt": "^1.0.1",
     "compression": "^1.6.2",
     "cors": "^2.8.3",
     "express": "^4.15.3",
+    "jsonwebtoken": "^7.4.1",
     "merge": "^1.2.0",
     "mongoose": "^4.11.0",
     "morgan": "^1.8.2",

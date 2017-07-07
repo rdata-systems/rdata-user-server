@@ -1,6 +1,6 @@
 const express = require('express');
 const morgan = require('morgan');
-const cors = require('cors')
+const cors = require('cors');
 const compression = require('compression');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
@@ -28,11 +28,14 @@ module.exports = function app(path, router){
     app.use(path, router);
 
     // error handlers
-    app.use(errorHandlers.clientErrorHandler);
     app.use(errorHandlers.validationErrorHandler);
-    app.use(errorHandlers.authenticationErrorHandler);
+    app.use(errorHandlers.resourceNotFoundErrorHandler);
+    app.use(errorHandlers.conflictErrorHandler);
+    app.use(errorHandlers.clientErrorHandler);
     app.use(errorHandlers.errorHandler);
     app.use(errorHandlers.notFoundErrorHandler);
+    app.use(errorHandlers.authenticationErrorHandler);
+    app.use(errorHandlers.authorizationErrorHandler);
 
     return app;
 };

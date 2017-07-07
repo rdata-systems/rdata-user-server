@@ -1,4 +1,6 @@
 const ClientError = require('../errors').ClientError;
+const ResourceNotFoundError = require('../errors').ResourceNotFoundError;
+const ConflictError = require('../errors').ConflictError;
 const AuthorizationError = require('../errors').AuthorizationError;
 const ValidationError = require('mongoose').Error.ValidationError;
 
@@ -25,6 +27,24 @@ function authorizationErrorHandler (err, req, res, next) {
     if (res.headersSent) return next(err);
     if(err && err instanceof AuthorizationError)
         return res.status(401).json({ error: err });
+
+    next(err);
+}
+
+// Resource not found error handler
+function resourceNotFoundErrorHandler (err, req, res, next){
+    if (res.headersSent) return next(err);
+    if (err && err instanceof ResourceNotFoundError)
+        return res.status(404).json({error: { message: err.message, name: err.name } });
+
+    next(err);
+}
+
+// Conflict error handler
+function conflictErrorHandler (err, req, res, next){
+    if (res.headersSent) return next(err);
+    if (err && err instanceof ConflictError)
+        return res.status(409).json({error: { message: err.message, name: err.name } });
 
     next(err);
 }
@@ -61,6 +81,8 @@ function notFoundErrorHandler (req, res, next) {
 
 
 module.exports.validationErrorHandler = validationErrorHandler;
+module.exports.resourceNotFoundErrorHandler = resourceNotFoundErrorHandler;
+module.exports.conflictErrorHandler = conflictErrorHandler;
 module.exports.clientErrorHandler = clientErrorHandler;
 module.exports.errorHandler = errorHandler;
 module.exports.notFoundErrorHandler = notFoundErrorHandler;

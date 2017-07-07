@@ -33,7 +33,7 @@ const config = {
     },
     development: {
         mongo: {
-            uri: 'mongodb://localhost/rdata-auth-dev',
+            uri: 'mongodb://localhost/authentication',
             options: {
                 debug: true
             }

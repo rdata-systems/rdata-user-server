@@ -96,6 +96,5 @@ userSchema.methods.authenticate = function authenticate(password, callback) {
     });
 };
 
-
 const User = mongoose.model('User', userSchema, 'users');
-module.exports.User = User;
+module.exports = User;
