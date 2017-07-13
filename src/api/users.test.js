@@ -61,6 +61,7 @@ describe('/users', function(){
                     if (err) return done(err);
                     assert(res.body.users);
                     assert.equal(res.body.users.length, userModels.length, "user length should be " + userModels.length);
+                    assert(!res.body.users[0].password, "user password is present in the output");
                     done();
                 });
         });

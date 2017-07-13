@@ -23,7 +23,7 @@ router.get('/', passportService.authenticate(), function(req, res, next){
     var users;
     User.find(query).sort(sort).limit(limit).skip(skip).exec()
         .then(function(_users){
-            users = _users;
+            users = _users.map(function(user){ return user.toObject() });
             return User.count(query).exec();
         })
         .then(function(totalCount){
