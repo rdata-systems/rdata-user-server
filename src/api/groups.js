@@ -35,7 +35,7 @@ router.get('/', passportService.authenticate(), function(req, res, next){
         })
         .then(function(totalCount){
             return res.json({
-                groups: groups,
+                groups: groups.map(function(group){ return group.toObject(); }),
                 meta: {
                     total: totalCount
                 },
@@ -61,7 +61,7 @@ router.get('/:groupId', passportService.authenticate(), function(req, res, next)
             if(!group)
                 return next(new errors.ResourceNotFoundError("Group not found"));
 
-            res.json({ group: group });
+            res.json({ group: group.toObject() });
         })
         .catch(next);
 
